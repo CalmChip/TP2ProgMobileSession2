@@ -1,4 +1,4 @@
-# Session2MobileTP1 
+# Session2MobileTP2
 
 
 Auteur: Jean-Bernard Le Blanc, Aliny Novais, Raphael Dorée
