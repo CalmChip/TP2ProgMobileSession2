@@ -24,15 +24,6 @@ export default function Register({ navigation }) {
 
   useEffect(() => {
     (async () => {
-      const isUserAuthenticated = await isAuthenticated();
-      if (isUserAuthenticated) {
-        navigation.navigate("Login");
-      }
-    })();
-  }, []);
-
-  useEffect(() => {
-    (async () => {
       await addUser();
     })();
   }, [idUser]);

@@ -67,28 +67,8 @@ export default function MainListe({ navigation }) {
             <Text>Nom: {item.nom}</Text>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={() => beforeDelete(item.id)}>
-          <Image
-            style={styles.removeIcon}
-            source={require("../assets/remove.jpg")}
-          />
-        </TouchableOpacity>
       </View>
     );
-  };
-
-  const beforeDelete = (id) => {
-    Alert.alert("Delete", "Are you sure?", [
-      {
-        text: "Cancel",
-        style: "cancel",
-      },
-      {
-        text: "Ok",
-        style: "ok",
-        onPress: () => {},
-      },
-    ]);
   };
 
   const getUsers = async () => {
