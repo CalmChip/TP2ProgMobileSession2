@@ -39,10 +39,6 @@ export default function Conversation({ navigation, route }) {
     })();
   }, [userData]);
 
-  useFocusEffect(() => {
-    (async () => {})();
-  });
-
   const renderMessageItem = ({ item }) => {
     if (!userData) return;
 

@@ -23,9 +23,11 @@ export default function Register({ navigation }) {
   const [idUser, setIdUser] = useState();
 
   useEffect(() => {
-    (async () => {
-      await addUser();
-    })();
+    if (idUser) {
+      (async () => {
+        await addUser();
+      })();
+    }
   }, [idUser]);
 
   const ajouterUser = async () => {
