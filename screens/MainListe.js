@@ -27,7 +27,7 @@ export default function MainListe({ navigation }) {
   useEffect(() => {
     (async () => {
       const isUserAuthenticated = await isAuthenticated();
-      if (!isUserAuthenticated) {
+      if (isUserAuthenticated) {
         navigation.navigate("Login");
       }
     })();
