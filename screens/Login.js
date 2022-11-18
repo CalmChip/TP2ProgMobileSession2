@@ -14,6 +14,7 @@ import {
   storeData,
   getCommonError,
 } from "../services/userServices";
+import { useFocusEffect } from "@react-navigation/native";
 
 //navigation sers a naviguer entre les ecrans
 export default function Login({ navigation }) {
@@ -21,14 +22,14 @@ export default function Login({ navigation }) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState();
 
-  useEffect(() => {
+  useFocusEffect(() => {
     (async () => {
       const isUserAuthenticated = await isAuthenticated();
       if (isUserAuthenticated) {
         navigation.navigate("Liste Contact");
       }
     })();
-  }, []);
+  });
 
   const seConnecter = async () => {
     var response = await login(email, password);
@@ -60,15 +61,12 @@ export default function Login({ navigation }) {
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
         />
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => seConnecter("Liste Contact")}
-        >
+        <TouchableOpacity style={styles.button} onPress={() => seConnecter()}>
           <Text style={styles.login}>Login</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => seConnecter("Accueil")}
+          onPress={() => navigation.navigate("Accueil")}
         >
           <Text style={styles.login}>Accueil</Text>
         </TouchableOpacity>

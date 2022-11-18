@@ -4,18 +4,19 @@ import React, { useEffect, useState } from "react";
 import { getMessages, sendMessage } from "../services/msgServices";
 import { getProfile, getData } from "../services/userServices";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
-const adminData = {
-  id: "ExNr00GVAEcfu2oBpouqbsRoIvt2",
-  email: "support@contoso.ca",
-  displayName: "TESTEUR",
-};
+import { BottomTabBarHeightCallbackContext } from "@react-navigation/bottom-tabs";
 
 export default function Conversation({ navigation, route }) {
+  const adminData = {
+    id: route.params._id,
+    email: route.params.email,
+    displayName: route.params.nom,
+  };
   const [chatMessage, setChatMessage] = useState();
   const [messages, setMessages] = useState([]);
   const [userData, setUserData] = useState();
   const [idToken, setIdToken] = useState();
+
   useEffect(() => {
     const getUserData = async () => {
       const tokenData = await getData();
@@ -33,16 +34,20 @@ export default function Conversation({ navigation, route }) {
       if (userData?.localId) {
         const conversations = await getMessages(userData.localId, adminData.id);
         // alert(JSON.stringify(conversations, null, 2))
-        setMessages(conversations.data || []);
+        setMessages(conversations.data);
       }
     })();
   }, [userData]);
+
+  useFocusEffect(() => {
+    (async () => {})();
+  });
 
   const renderMessageItem = ({ item }) => {
     if (!userData) return;
 
     const msgBoxStyle =
-      item["from"].id === userData.localId
+      item["from"].id === userData.localIdr
         ? styles.messageRight
         : styles.messageLeft;
 
@@ -93,6 +98,7 @@ export default function Conversation({ navigation, route }) {
   return (
     <Stack spacing={4} style={{ flex: 1 }}>
       <View style={{ flex: 2 }}>
+        <Text>Conversation avec {route.params.nom}</Text>
         <FlatList
           data={messages}
           renderItem={renderMessageItem}

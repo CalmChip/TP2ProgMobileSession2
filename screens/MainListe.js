@@ -59,11 +59,11 @@ export default function MainListe({ navigation }) {
             onPress={() =>
               navigation.navigate("Conversation", {
                 nom: item.nom,
-                email: item._id,
+                email: item.email,
               })
             }
           >
-            <Text style={{ marginBottom: 10 }}>Email: {item._id}</Text>
+            <Text style={{ marginBottom: 10 }}>Email: {item.email}</Text>
             <Text>Nom: {item.nom}</Text>
           </TouchableOpacity>
         </View>

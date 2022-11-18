@@ -1,6 +1,7 @@
 import React from "react";
 import { View, StyleSheet, Text, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { isAuthenticated, getCommonError } from "../services/userServices";
 
 export default function Accueil({ navigation }) {
   return (
