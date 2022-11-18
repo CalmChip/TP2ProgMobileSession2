@@ -50,7 +50,6 @@ export default function Register({ navigation }) {
       email: email,
       _id: idUser,
     };
-    console.log(newUser);
     try {
       const docRef = await addDoc(collection(db, "usagers"), newUser);
       newUser.id = docRef.id;
@@ -64,7 +63,6 @@ export default function Register({ navigation }) {
       setErrorMessage("");
       var response = await signUp(email, password);
       if (response.success) {
-        console.log(response);
         setIdUser(response.localId);
       } else {
         var message = getCommonError(response?.error?.message);
