@@ -46,7 +46,7 @@ export default function Register({ navigation }) {
 
   const addUser = async () => {
     const newUser = {
-      nom: firstName + lastName,
+      nom: firstName + " " + lastName,
       email: email,
       _id: idUser,
     };
