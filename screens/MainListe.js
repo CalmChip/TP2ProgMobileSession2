@@ -20,19 +20,20 @@ import {
 } from "firebase/firestore";
 import * as Contacts from "expo-contacts";
 import { isAuthenticated, getCommonError } from "../services/userServices";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function MainListe({ navigation }) {
   const [users, setUsers] = useState([]);
 
-  useEffect(() => {
+  useFocusEffect(() => {
     (async () => {
       const isUserAuthenticated = await isAuthenticated();
-      if (isUserAuthenticated) {
+      if (!isUserAuthenticated) {
         navigation.navigate("Login");
       }
     })();
     getUsers();
-  }, []);
+  });
 
   const listeContact = async () => {
     const userList = [];
@@ -60,6 +61,7 @@ export default function MainListe({ navigation }) {
               navigation.navigate("Conversation", {
                 nom: item.nom,
                 email: item.email,
+                _id: item._id,
               })
             }
           >

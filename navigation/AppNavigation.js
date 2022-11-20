@@ -6,13 +6,30 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import MainListe from "../screens/MainListe";
 import Conversation from "../screens/Conversation";
+import { MaterialIcons } from "@expo/vector-icons";
+import { clearData } from "../services/userServices";
 
 const Drawer = createDrawerNavigator();
+
+const logout = async () => {
+  await clearData();
+};
 
 const AppNavigation = () => {
   return (
     <NavigationContainer>
-      <Drawer.Navigator>
+      <Drawer.Navigator
+        screenOptions={{
+          headerRight: () => (
+            <MaterialIcons
+              name="logout"
+              size={30}
+              color="white"
+              onPress={() => logout()}
+            />
+          ),
+        }}
+      >
         <Drawer.Screen
           options={{
             title: "Accueil",

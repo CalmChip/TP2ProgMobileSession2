@@ -22,6 +22,7 @@ export default function Conversation({ navigation, route }) {
       const tokenData = await getData();
       if (tokenData && tokenData.idToken) {
         const userProfile = await getProfile(tokenData.idToken);
+        console.log(userProfile);
         setUserData(userProfile.users[0]);
         setIdToken(tokenData.idToken);
       }
@@ -43,7 +44,7 @@ export default function Conversation({ navigation, route }) {
     if (!userData) return;
 
     const msgBoxStyle =
-      item["from"].id === userData.localIdr
+      item["from"].id === userData.localId
         ? styles.messageRight
         : styles.messageLeft;
 
