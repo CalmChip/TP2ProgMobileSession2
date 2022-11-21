@@ -25,6 +25,10 @@ import { useFocusEffect } from "@react-navigation/native";
 export default function MainListe({ navigation }) {
   const [users, setUsers] = useState([]);
 
+  useEffect(() => {
+    getUsers();
+  }, []);
+
   useFocusEffect(() => {
     (async () => {
       const isUserAuthenticated = await isAuthenticated();
@@ -32,7 +36,6 @@ export default function MainListe({ navigation }) {
         navigation.navigate("Login");
       }
     })();
-    getUsers();
   });
 
   const listeContact = async () => {
@@ -43,7 +46,7 @@ export default function MainListe({ navigation }) {
       console.log(data);
       data.forEach((doc) => {
         const user = {
-          _id: "Phone contact",
+          id: doc.id,
           nom: doc.name,
         };
         userList.push(user);
@@ -59,9 +62,11 @@ export default function MainListe({ navigation }) {
           <TouchableOpacity
             onPress={() =>
               navigation.navigate("Conversation", {
-                nom: item.nom,
-                email: item.email,
-                _id: item._id,
+                withUser: {
+                  nom: item.nom,
+                  email: item.email,
+                  id: item._id,
+                },
               })
             }
           >

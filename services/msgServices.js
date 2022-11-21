@@ -1,11 +1,23 @@
 const DATABASE_URL =
-  'https://tpcoursmobile-default-rtdb.firebaseio.com/conversations';
+  "https://tpcoursmobile-default-rtdb.firebaseio.com/conversations";
+
+const getAllMessages = async (fromUserId) => {
+  var response = await fetch(`${DATABASE_URL}/${fromUserId}.json`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  var data = await response.json();
+  return { success: response.ok, data };
+};
 
 const getMessages = async (fromUserId, toUserId) => {
   var response = await fetch(`${DATABASE_URL}/${fromUserId}/${toUserId}.json`, {
-    method: 'GET',
+    method: "GET",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   });
 
@@ -15,9 +27,9 @@ const getMessages = async (fromUserId, toUserId) => {
 
 const sendMessage = async (userId, messages) => {
   var response = await fetch(`${DATABASE_URL}/${userId}.json`, {
-    method: 'PUT',
+    method: "PUT",
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
     body: JSON.stringify(messages),
   });
@@ -26,4 +38,4 @@ const sendMessage = async (userId, messages) => {
   return { success: response.ok, ...data };
 };
 
-export { getMessages, sendMessage };
+export { getMessages, sendMessage, getAllMessages };

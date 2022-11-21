@@ -4,36 +4,39 @@ import React, { useEffect, useState } from "react";
 import { getMessages, sendMessage } from "../services/msgServices";
 import { getProfile, getData } from "../services/userServices";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { BottomTabBarHeightCallbackContext } from "@react-navigation/bottom-tabs";
+import { isAuthenticated } from "../services/userServices";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Conversation({ navigation, route }) {
-  const adminData = {
-    id: route.params._id,
-    email: route.params.email,
-    displayName: route.params.nom,
-  };
+  const { withUser } = route.params;
   const [chatMessage, setChatMessage] = useState();
   const [messages, setMessages] = useState([]);
   const [userData, setUserData] = useState();
-  const [idToken, setIdToken] = useState();
 
   useEffect(() => {
     const getUserData = async () => {
       const tokenData = await getData();
       if (tokenData && tokenData.idToken) {
         const userProfile = await getProfile(tokenData.idToken);
-        console.log(userProfile);
         setUserData(userProfile.users[0]);
-        setIdToken(tokenData.idToken);
       }
     };
     getUserData();
   }, []);
 
+  useFocusEffect(() => {
+    (async () => {
+      const isUserAuthenticated = await isAuthenticated();
+      if (!isUserAuthenticated) {
+        navigation.navigate("Login");
+      }
+    })();
+  });
+
   useEffect(() => {
     (async () => {
       if (userData?.localId) {
-        const conversations = await getMessages(userData.localId, adminData.id);
+        const conversations = await getMessages(userData.localId, withUser.id);
         // alert(JSON.stringify(conversations, null, 2))
         setMessages(conversations.data);
       }
@@ -66,7 +69,7 @@ export default function Conversation({ navigation, route }) {
         email: userData.email,
         displayName: userData.displayName,
       },
-      to: adminData,
+      to: withUser,
       content: chatMessage,
       date: new Date(),
     };
@@ -74,12 +77,12 @@ export default function Conversation({ navigation, route }) {
     // Message envoyé par l'utilisateur connecté
     await sendMessage(
       userData.localId,
-      messageFrom(adminData.id, messageToSend)
+      messageFrom(withUser.id, messageToSend)
     );
 
     // Message reçu par l'autre utilisateur
     await sendMessage(
-      adminData.id,
+      withUser.id,
       messageFrom(userData.localId, messageToSend)
     );
 
@@ -95,7 +98,7 @@ export default function Conversation({ navigation, route }) {
   return (
     <Stack spacing={4} style={{ flex: 1 }}>
       <View style={{ flex: 2 }}>
-        <Text>Conversation avec {route.params.nom}</Text>
+        <Text>Conversation avec {withUser.nom}</Text>
         <FlatList
           data={messages}
           renderItem={renderMessageItem}
