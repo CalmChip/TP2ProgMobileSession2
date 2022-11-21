@@ -18,7 +18,7 @@ export default function Conversation({ navigation, route }) {
       const tokenData = await getData();
       if (tokenData && tokenData.idToken) {
         const userProfile = await getProfile(tokenData.idToken);
-        console.log("User profile: ", userProfile.users[0]);
+
         setUserData(userProfile.users[0]);
       }
     };
@@ -37,7 +37,7 @@ export default function Conversation({ navigation, route }) {
     (async () => {
       if (userData?.localId) {
         const conversations = await getMessages(userData.localId, withUser.id);
-        console.log("Conversation: ", conversations);
+
         setMessages(conversations.data || []);
       }
     })();

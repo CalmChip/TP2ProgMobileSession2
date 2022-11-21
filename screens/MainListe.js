@@ -33,7 +33,7 @@ export default function MainListe({ navigation }) {
     const { status } = await Contacts.requestPermissionsAsync();
     if (status === "granted") {
       const { data } = await Contacts.getContactsAsync({});
-      console.log(data);
+
       data.forEach((doc) => {
         const user = {
           id: doc.id,

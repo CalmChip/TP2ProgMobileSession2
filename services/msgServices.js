@@ -20,9 +20,9 @@ const getMessages = async (fromUserId, toUserId) => {
       "Content-Type": "application/json",
     },
   });
-  console.log(`Convo with:  ${DATABASE_URL}/${fromUserId}/${toUserId}.json`);
+
   var data = await response.json();
-  console.log("Data: ", data);
+
   return { success: response.ok, data };
 };
 

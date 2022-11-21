@@ -59,7 +59,7 @@ const storeData = async (idToken, expiresInSeconds) => {
   expiresIn.setSeconds(expiresIn.getSeconds() + expiresInSeconds);
 
   const value = { idToken, expiresIn };
-  console.log(value);
+
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("@token", jsonValue);
@@ -81,7 +81,6 @@ const clearData = async () => {
   try {
     await AsyncStorage.clear();
     await AsyncStorage.removeItem("@token");
-    console.log("Done.");
   } catch (e) {
     // clear error
   }
