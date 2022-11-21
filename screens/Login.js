@@ -52,7 +52,7 @@ export default function Login({ navigation }) {
       <View style={styles.container}>
         <TextInput
           style={styles.input}
-          placeholder="Username"
+          placeholder="Email"
           onChangeText={(text) => setEmail(text)}
         />
         <TextInput
