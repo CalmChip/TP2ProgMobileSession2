@@ -80,7 +80,6 @@ const getData = async () => {
 const clearData = async () => {
   try {
     await AsyncStorage.clear();
-    await AsyncStorage.removeItem("@token");
   } catch (e) {
     // clear error
   }
