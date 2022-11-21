@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import { TextInput, Stack } from "@react-native-material/core";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import {
-  isAuthenticated,
-  signUp,
-  updateProfile,
-  getCommonError,
-  login,
-} from "../services/userServices";
+import { signUp, getCommonError } from "../services/userServices";
 import { db } from "../database/firebase";
 import { addDoc, collection } from "firebase/firestore";
 

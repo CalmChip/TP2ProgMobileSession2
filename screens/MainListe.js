@@ -4,20 +4,10 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
-  Alert,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { db } from "../database/firebase";
-import {
-  collection,
-  addDoc,
-  getDocs,
-  doc,
-  deleteDoc,
-  updateDoc,
-  getFirestore,
-} from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import * as Contacts from "expo-contacts";
 import { isAuthenticated, getCommonError } from "../services/userServices";
 import { useFocusEffect } from "@react-navigation/native";

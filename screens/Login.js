@@ -6,14 +6,12 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React, { useState } from "react";
 import {
   isAuthenticated,
   login,
   storeData,
   getCommonError,
-  clearData,
 } from "../services/userServices";
 import { useFocusEffect } from "@react-navigation/native";
 
