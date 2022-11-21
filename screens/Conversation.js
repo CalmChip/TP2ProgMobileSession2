@@ -93,11 +93,6 @@ export default function Conversation({ navigation, route }) {
   const getMessageData = (messageToSend) => {
     return [...messages, messageToSend];
   };
-  const messageFrom = (userId, messageToSend) => {
-    return {
-      [userId]: [...messages, messageToSend],
-    };
-  };
 
   return (
     <Stack spacing={4} style={{ flex: 1 }}>
