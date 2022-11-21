@@ -43,10 +43,6 @@ export default function Conversation({ navigation, route }) {
     })();
   }, [userData, withUser]);
 
-  const logout = async () => {
-    await clearData();
-  };
-
   const renderMessageItem = ({ item }) => {
     if (!userData) return;
 
