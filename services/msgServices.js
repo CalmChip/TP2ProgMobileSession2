@@ -20,9 +20,10 @@ const getMessages = async (fromUserId, toUserId) => {
       "Content-Type": "application/json",
     },
   });
-
+  console.log(`Convo with:  ${DATABASE_URL}/${fromUserId}/${toUserId}.json`);
   var data = await response.json();
-  return { success: response.ok, ...data };
+  console.log("Data: ", data);
+  return { success: response.ok, data };
 };
 
 const sendMessage = async (userId, messages) => {
@@ -35,7 +36,7 @@ const sendMessage = async (userId, messages) => {
   });
 
   var data = await response.json();
-  return { success: response.ok, ...data };
+  return { success: response.ok, data };
 };
 
 export { getMessages, sendMessage, getAllMessages };

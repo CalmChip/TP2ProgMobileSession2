@@ -59,7 +59,7 @@ const storeData = async (idToken, expiresInSeconds) => {
   expiresIn.setSeconds(expiresIn.getSeconds() + expiresInSeconds);
 
   const value = { idToken, expiresIn };
-
+  console.log(value);
   try {
     const jsonValue = JSON.stringify(value);
     await AsyncStorage.setItem("@token", jsonValue);

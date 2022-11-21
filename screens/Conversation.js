@@ -18,6 +18,7 @@ export default function Conversation({ navigation, route }) {
       const tokenData = await getData();
       if (tokenData && tokenData.idToken) {
         const userProfile = await getProfile(tokenData.idToken);
+        console.log("User profile: ", userProfile.users[0]);
         setUserData(userProfile.users[0]);
       }
     };
@@ -32,16 +33,15 @@ export default function Conversation({ navigation, route }) {
       }
     })();
   });
-
   useEffect(() => {
     (async () => {
       if (userData?.localId) {
         const conversations = await getMessages(userData.localId, withUser.id);
-        // alert(JSON.stringify(conversations, null, 2))
-        setMessages(conversations.data);
+        console.log("Conversation: ", conversations);
+        setMessages(conversations.data || []);
       }
     })();
-  }, [userData]);
+  }, [userData, withUser]);
 
   const renderMessageItem = ({ item }) => {
     if (!userData) return;
@@ -55,7 +55,6 @@ export default function Conversation({ navigation, route }) {
       <View style={msgBoxStyle}>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           <Text style={{ fontWeight: "bold" }}>{item.from.displayName} </Text>
-          <Text>{item.date.toLocaleDateString()}</Text>
         </View>
         <Text>{item.content}</Text>
       </View>
@@ -67,7 +66,7 @@ export default function Conversation({ navigation, route }) {
       from: {
         id: userData.localId,
         email: userData.email,
-        displayName: userData.displayName,
+        displayName: userData.displayName || userData.email.split("@")[0],
       },
       to: withUser,
       content: chatMessage,
@@ -94,7 +93,6 @@ export default function Conversation({ navigation, route }) {
       [userId]: [...messages, messageToSend],
     };
   };
-
   return (
     <Stack spacing={4} style={{ flex: 1 }}>
       <View style={{ flex: 2 }}>
