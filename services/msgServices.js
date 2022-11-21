@@ -26,8 +26,8 @@ const getMessages = async (fromUserId, toUserId) => {
   return { success: response.ok, data };
 };
 
-const sendMessage = async (userId, messages) => {
-  var response = await fetch(`${DATABASE_URL}/${userId}.json`, {
+const sendMessage = async (fromUserId, toUserId, messages) => {
+  var response = await fetch(`${DATABASE_URL}/${fromUserId}/${toUserId}.json`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -36,7 +36,7 @@ const sendMessage = async (userId, messages) => {
   });
 
   var data = await response.json();
-  return { success: response.ok, data };
+  return { success: response.ok, ...data };
 };
 
 export { getMessages, sendMessage, getAllMessages };

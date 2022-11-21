@@ -13,6 +13,7 @@ import {
   login,
   storeData,
   getCommonError,
+  clearData,
 } from "../services/userServices";
 import { useFocusEffect } from "@react-navigation/native";
 

@@ -80,11 +80,11 @@ const getData = async () => {
 const clearData = async () => {
   try {
     await AsyncStorage.clear();
+    await AsyncStorage.removeItem("@token");
+    console.log("Done.");
   } catch (e) {
     // clear error
   }
-
-  console.log("Done.");
 };
 
 const isAuthenticated = async () => {

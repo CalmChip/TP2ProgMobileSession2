@@ -8,6 +8,7 @@ import MainListe from "../screens/MainListe";
 import Conversation from "../screens/Conversation";
 import { MaterialIcons } from "@expo/vector-icons";
 import { clearData } from "../services/userServices";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Drawer = createDrawerNavigator();
 

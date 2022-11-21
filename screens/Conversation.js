@@ -23,7 +23,7 @@ export default function Conversation({ navigation, route }) {
       }
     };
     getUserData();
-  }, []);
+  }, [withUser]);
 
   useFocusEffect(() => {
     (async () => {
@@ -42,6 +42,10 @@ export default function Conversation({ navigation, route }) {
       }
     })();
   }, [userData, withUser]);
+
+  const logout = async () => {
+    await clearData();
+  };
 
   const renderMessageItem = ({ item }) => {
     if (!userData) return;
@@ -76,23 +80,29 @@ export default function Conversation({ navigation, route }) {
     // Message envoyé par l'utilisateur connecté
     await sendMessage(
       userData.localId,
-      messageFrom(withUser.id, messageToSend)
+      withUser.id,
+      getMessageData(messageToSend)
     );
 
     // Message reçu par l'autre utilisateur
     await sendMessage(
       withUser.id,
-      messageFrom(userData.localId, messageToSend)
+      userData.localId,
+      getMessageData(messageToSend)
     );
 
     setMessages([...messages, messageToSend]);
   };
 
+  const getMessageData = (messageToSend) => {
+    return [...messages, messageToSend];
+  };
   const messageFrom = (userId, messageToSend) => {
     return {
       [userId]: [...messages, messageToSend],
     };
   };
+
   return (
     <Stack spacing={4} style={{ flex: 1 }}>
       <View style={{ flex: 2 }}>
