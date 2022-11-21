@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Session2Tp1",
-    "slug": "Session2Tp1",
+    "name": "Session2Tp2WeChatApp",
+    "slug": "Session2Tp2WeChatApp",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/logoApp.png",
@@ -22,7 +22,9 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "Session2Tp2WeChatApp",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
