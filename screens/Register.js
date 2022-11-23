@@ -134,6 +134,7 @@ export default function Register({ navigation }) {
         />
         <TextInput
           placeholder="Email"
+          textContentType="email"
           value={email}
           onChangeText={(text) => setEmail(text)}
           leading={(props) => (
@@ -146,6 +147,7 @@ export default function Register({ navigation }) {
         />
         <TextInput
           placeholder="Mot de passe"
+          textContentType="password"
           value={password}
           onChangeText={(text) => setPassword(text)}
           leading={(props) => (
@@ -158,6 +160,7 @@ export default function Register({ navigation }) {
         />
         <TextInput
           placeholder="Confirmation"
+          textContentType="password"
           value={confirmation}
           onChangeText={(text) => setConfirmation(text)}
           leading={(props) => (

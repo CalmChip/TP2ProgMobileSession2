@@ -57,6 +57,7 @@ export default function Login({ navigation }) {
         />
         <TextInput
           style={styles.input}
+          textContentType="password"
           placeholder="Password"
           onChangeText={(text) => setPassword(text)}
         />

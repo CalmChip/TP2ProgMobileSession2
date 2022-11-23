@@ -23,11 +23,16 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "Session2Tp2WeChatApp",
-      "versionCode": 1
+      "package": "com.calmchip.Session2Tp2WeChatApp",
+      "versionCode": 2
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "eae95199ef05416c8df461f2b11d9afb"
+      }
     }
   }
 }
